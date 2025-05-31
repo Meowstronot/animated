@@ -2,7 +2,7 @@
 
 html, body {
   font-family: 'Roboto Mono', monospace;
-  background: #212121;
+  background: #000000;
   height: 100%;
 }
 
@@ -15,8 +15,8 @@ html, body {
 }
 
 .text {
-  font-weight: 500; /* Ganti ke 400, 500, atau 700 untuk ketebalan font */
-  font-size: 28px;
+  font-weight: 700; /* Ganti ke 400, 500, atau 700 untuk ketebalan font */
+  font-size: 45px;
   color: #FAFAFA;
 }
 
