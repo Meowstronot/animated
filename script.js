@@ -12,7 +12,7 @@ class TextScramble {
     this.queue = [];
     
     // Menghitung total durasi animasi
-    const duration = 3.3; // Durasi animasi dalam detik
+    const duration = 2; // Durasi animasi dalam detik
     const steps = 60; // Jumlah langkah per detik (60 frame per detik)
     const totalFrames = duration * steps; // Total frame untuk animasi
 
@@ -60,10 +60,12 @@ class TextScramble {
     return this.chars[Math.floor(Math.random() * this.chars.length)];
   }
 
-  // Function to create colored text
+  // Function to create colored text and wrap it in a link
   createColoredText(text, isFinalText = false) {
     const color = isFinalText ? 'white' : this.randomColor(); // If final text, set color to white
-    return `<span style="color: ${color}">${text}</span>`;
+    
+    // Return the entire text wrapped inside an anchor tag (<a>) for the link functionality
+    return `<a href="https://github.com/Meowstronot" target="_blank" style="color: ${color}; text-decoration: none; display: inline-block;">${text}</a>`;
   }
 
   // Function to generate a random color
