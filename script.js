@@ -65,7 +65,7 @@ class TextScramble {
     const color = isFinalText ? 'white' : this.randomColor(); // If final text, set color to white
     
     // Return the entire text wrapped inside an anchor tag (<a>) for the link functionality
-    return `<a href="https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/" target="_blank" style="color: ${color}; text-decoration: none; display: inline-block;">${text}</a>`;
+    return `<a href="https://github.com/Meowstronot" target="_blank" style="color: ${color}; text-decoration: none; display: inline-block;">${text}</a>`;
   }
 
   // Function to generate a random color
