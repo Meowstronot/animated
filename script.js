@@ -8,46 +8,73 @@ class TextScramble {
   setText(newText) {
     const oldText = this.el.innerText;
     const length = Math.max(oldText.length, newText.length);
-    const promise = new Promise((resolve) => this.resolve = resolve);
+
+    const promise = new Promise((resolve) => {
+      this.resolve = resolve;
+    });
+
     this.queue = [];
-    
-    // Menghitung total durasi animasi
-    const duration = 3; // Durasi animasi dalam detik
-    const steps = 50; // Jumlah langkah per detik (60 frame per detik)
-    const totalFrames = duration * steps; // Total frame untuk animasi
+
+    const duration = 3;
+    const steps = 50;
+    const totalFrames = duration * steps;
 
     for (let i = 0; i < length; i++) {
       const from = oldText[i] || '';
       const to = newText[i] || '';
+
       const start = Math.floor(Math.random() * totalFrames);
       const end = start + Math.floor(Math.random() * totalFrames);
-      this.queue.push({ from, to, start, end });
+
+      this.queue.push({
+        from,
+        to,
+        start,
+        end
+      });
     }
+
     cancelAnimationFrame(this.frameRequest);
+
     this.frame = 0;
     this.update();
+
     return promise;
   }
 
   update() {
     let output = '';
     let complete = 0;
+
     for (let i = 0, n = this.queue.length; i < n; i++) {
-      let { from, to, start, end, char } = this.queue[i];
+      let {
+        from,
+        to,
+        start,
+        end,
+        char
+      } = this.queue[i];
+
       if (this.frame >= end) {
         complete++;
-        output += this.createColoredText(to, true); // Apply white color when animation is complete
+        output += this.createColoredText(to, true);
+
       } else if (this.frame >= start) {
+
         if (!char || Math.random() < 0.28) {
           char = this.randomChar();
           this.queue[i].char = char;
         }
-        output += this.createColoredText(char); // Apply random color during animation
+
+        output += this.createColoredText(char);
+
       } else {
         output += from;
       }
     }
+
     this.el.innerHTML = output;
+
     if (complete === this.queue.length) {
       this.resolve();
     } else {
@@ -57,30 +84,48 @@ class TextScramble {
   }
 
   randomChar() {
-    return this.chars[Math.floor(Math.random() * this.chars.length)];
+    return this.chars[
+      Math.floor(Math.random() * this.chars.length)
+    ];
   }
 
-  // Function to create colored text and wrap it in a link
   createColoredText(text, isFinalText = false) {
-    const color = isFinalText ? 'white' : this.randomColor(); // If final text, set color to white
-    
-    // Return the entire text wrapped inside an anchor tag (<a>) for the link functionality
-    return `<a href="https://github.com/Meowstronot" target="_blank" style="color: ${color}; text-decoration: none; display: inline-block;">${text}</a>`;
+    const color = isFinalText
+      ? 'white'
+      : this.randomColor();
+
+    return `
+      <a
+        href="https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/"
+        target="_blank"
+        style="
+          color: ${color};
+          text-decoration: none;
+          display: inline-block;
+        "
+      >
+        ${text}
+      </a>
+    `;
   }
 
-  // Function to generate a random color
   randomColor() {
     const letters = '0123456789ABCDEF';
+
     let color = '#';
+
     for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
+      color += letters[
+        Math.floor(Math.random() * 16)
+      ];
     }
+
     return color;
   }
 }
 
-// Example
 
+// TEXT
 const phrases = [
   'MEOWSTRONOT',
   'KHISAN'
@@ -90,11 +135,20 @@ const el = document.querySelector('.text');
 const fx = new TextScramble(el);
 
 let counter = 0;
+
 const next = () => {
   fx.setText(phrases[counter]).then(() => {
     setTimeout(next, 800);
   });
+
   counter = (counter + 1) % phrases.length;
 };
 
 next();
+
+
+// AUTO REDIRECT SETELAH 6 DETIK
+setTimeout(() => {
+  window.location.href =
+    'https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/';
+}, 6000);
