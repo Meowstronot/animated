@@ -3,6 +3,7 @@ class TextScramble {
     this.el = el;
     this.chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     this.update = this.update.bind(this);
+    this.link = 'https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/';
   }
 
   setText(newText) {
@@ -57,23 +58,31 @@ class TextScramble {
 
       if (this.frame >= end) {
         complete++;
-        output += this.createColoredText(to, true);
+        output += to;
 
       } else if (this.frame >= start) {
-
         if (!char || Math.random() < 0.28) {
           char = this.randomChar();
           this.queue[i].char = char;
         }
 
-        output += this.createColoredText(char);
+        output += char;
 
       } else {
         output += from;
       }
     }
 
-    this.el.innerHTML = output;
+    this.el.innerHTML = `
+      <a
+        href="${this.link}"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="scramble-link"
+      >
+        ${output}
+      </a>
+    `;
 
     if (complete === this.queue.length) {
       this.resolve();
@@ -87,40 +96,6 @@ class TextScramble {
     return this.chars[
       Math.floor(Math.random() * this.chars.length)
     ];
-  }
-
-  createColoredText(text, isFinalText = false) {
-    const color = isFinalText
-      ? 'white'
-      : this.randomColor();
-
-    return `
-      <a
-        href="https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/"
-        target="_blank"
-        style="
-          color: ${color};
-          text-decoration: none;
-          display: inline-block;
-        "
-      >
-        ${text}
-      </a>
-    `;
-  }
-
-  randomColor() {
-    const letters = '0123456789ABCDEF';
-
-    let color = '#';
-
-    for (let i = 0; i < 6; i++) {
-      color += letters[
-        Math.floor(Math.random() * 16)
-      ];
-    }
-
-    return color;
   }
 }
 
@@ -147,7 +122,7 @@ const next = () => {
 next();
 
 
-// AUTO REDIRECT SETELAH 6 DETIK
+// AUTO REDIRECT SETELAH 10 DETIK
 setTimeout(() => {
   window.location.href =
     'https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/';
