@@ -151,4 +151,4 @@ next();
 setTimeout(() => {
   window.location.href =
     'https://www.linkedin.com/in/muhammad-khisanul-fakhrudin-akbar/';
-}, 6000);
+}, 10000);
